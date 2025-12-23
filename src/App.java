@@ -23,6 +23,7 @@ public class App {
             sc.nextLine();
 
             switch (option) {
+
                 case 1:
                     System.out.print("Nome: ");
                     String name = sc.nextLine().trim();
@@ -35,6 +36,20 @@ public class App {
 
                     if (name.isEmpty() || phone.isEmpty() || email.isEmpty()) {
                         System.out.println("Erro: nome, telefone e email são obrigatórios.");
+                        break;
+                    }
+
+                    boolean emailExists = false;
+
+                    for (Contact c : contacts) {
+                        if (c.getEmail().equalsIgnoreCase(email)) {
+                            emailExists = true;
+                            break;
+                        }
+                    }
+
+                    if (emailExists) {
+                        System.out.println("Erro: já existe um contato com esse email.");
                         break;
                     }
 
