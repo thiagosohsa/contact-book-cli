@@ -84,8 +84,20 @@ public class App {
                     break;
 
                 case 4:
-                    System.out.println("Remover contato (ainda não implementado)");
+                    System.out.print("Digite o número do contato para remover: ");
+                    int removeNumber = sc.nextInt();
+                    sc.nextLine(); // limpa buffer
+
+                    int removeIndex = removeNumber - 1;
+
+                    if (removeIndex < 0 || removeIndex >= contacts.size()) {
+                        System.out.println("Contato inválido.");
+                    } else {
+                        Contact removed = contacts.remove(removeIndex);
+                        System.out.println("Contato removido: " + removed.getName());
+                    }
                     break;
+
                 case 0:
                     System.out.println("Saindo...");
                     break;
