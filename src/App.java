@@ -43,8 +43,23 @@ public class App {
                     break;
 
                 case 2:
-                    System.out.println("Listar contatos (ainda não implementado)");
+                    System.out.println("\n--- LISTA DE CONTATOS ---");
+
+                    if (contacts.isEmpty()) {
+                        System.out.println("Nenhum contato cadastrado.");
+                    } else {
+                        for (int i = 0; i < contacts.size(); i++) {
+                            Contact c = contacts.get(i);
+                            System.out.printf(
+                                    "%d - %s | %s | %s%n",
+                                    (i + 1),
+                                    c.getName(),
+                                    c.getPhone(),
+                                    c.getEmail());
+                        }
+                    }
                     break;
+
                 case 3:
                     System.out.println("Buscar por nome (ainda não implementado)");
                     break;
