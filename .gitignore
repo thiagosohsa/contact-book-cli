@@ -1,0 +1,11 @@
+*.class
+out/
+bin/
+data/*.csv
+
+
+.idea/
+.vscode/
+*.iml
+
+.DS_Store
