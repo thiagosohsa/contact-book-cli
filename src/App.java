@@ -61,8 +61,28 @@ public class App {
                     break;
 
                 case 3:
-                    System.out.println("Buscar por nome (ainda não implementado)");
+                    System.out.print("Buscar por nome: ");
+                    String search = sc.nextLine().trim().toLowerCase();
+
+                    boolean found = false;
+                    System.out.println("\n--- RESULTADO DA BUSCA ---");
+
+                    for (Contact c : contacts) {
+                        if (c.getName().toLowerCase().contains(search)) {
+                            System.out.printf(
+                                    "%s | %s | %s%n",
+                                    c.getName(),
+                                    c.getPhone(),
+                                    c.getEmail());
+                            found = true;
+                        }
+                    }
+
+                    if (!found) {
+                        System.out.println("Nenhum contato encontrado.");
+                    }
                     break;
+
                 case 4:
                     System.out.println("Remover contato (ainda não implementado)");
                     break;
