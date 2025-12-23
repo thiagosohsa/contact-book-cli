@@ -1,8 +1,13 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+
+        List<Contact> contacts = new ArrayList<>();
+
         int option;
 
         do {
@@ -19,8 +24,24 @@ public class App {
 
             switch (option) {
                 case 1:
-                    System.out.println("Adicionar contato (ainda não implementado)");
+                    System.out.print("Nome: ");
+                    String name = sc.nextLine().trim();
+
+                    System.out.print("Telefone: ");
+                    String phone = sc.nextLine().trim();
+
+                    System.out.print("Email: ");
+                    String email = sc.nextLine().trim();
+
+                    if (name.isEmpty() || phone.isEmpty() || email.isEmpty()) {
+                        System.out.println("Erro: nome, telefone e email são obrigatórios.");
+                        break;
+                    }
+
+                    contacts.add(new Contact(name, phone, email));
+                    System.out.println("Contato adicionado!");
                     break;
+
                 case 2:
                     System.out.println("Listar contatos (ainda não implementado)");
                     break;
