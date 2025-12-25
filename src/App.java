@@ -79,41 +79,43 @@ public class App {
     private static void listContacts(ContactService contactService) {
         System.out.println("\n--- LISTA DE CONTATOS ---");
 
-        if (contactService.getAll().isEmpty()) {
+        var contacts = contactService.listAll();
+
+        if (contacts.isEmpty()) {
             System.out.println("Nenhum contato cadastrado.");
-        } else {
-            int index = 1;
-            for (Contact c : contactService.getAll()) {
-                System.out.printf(
-                        "%d - %s | %s | %s%n",
-                        index++,
-                        c.getName(),
-                        c.getPhone(),
-                        c.getEmail());
-            }
+            return;
+        }
+
+        int index = 1;
+        for (Contact c : contacts) {
+            System.out.printf(
+                    "%d - %s | %s | %s%n",
+                    index++,
+                    c.getName(),
+                    c.getPhone(),
+                    c.getEmail());
         }
     }
 
     private static void searchContacts(Scanner sc, ContactService contactService) {
         System.out.print("Buscar por nome: ");
-        String search = sc.nextLine().trim().toLowerCase();
+        String search = sc.nextLine().trim();
 
-        boolean found = false;
+        var results = contactService.findByName(search);
+
         System.out.println("\n--- RESULTADO DA BUSCA ---");
 
-        for (Contact c : contactService.getAll()) {
-            if (c.getName().toLowerCase().contains(search)) {
-                System.out.printf(
-                        "%s | %s | %s%n",
-                        c.getName(),
-                        c.getPhone(),
-                        c.getEmail());
-                found = true;
-            }
+        if (results.isEmpty()) {
+            System.out.println("Nenhum contato encontrado.");
+            return;
         }
 
-        if (!found) {
-            System.out.println("Nenhum contato encontrado.");
+        for (Contact c : results) {
+            System.out.printf(
+                    "%s | %s | %s%n",
+                    c.getName(),
+                    c.getPhone(),
+                    c.getEmail());
         }
     }
 
