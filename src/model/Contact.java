@@ -1,3 +1,5 @@
+package model;
+
 public class Contact {
     private final String name;
     private final String phone;

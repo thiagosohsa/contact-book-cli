@@ -1,3 +1,6 @@
+import model.Contact;
+import service.ContactService;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -6,7 +9,7 @@ public class App {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        List<Contact> contacts = new ArrayList<>();
+        ContactService contactService = new ContactService();
 
         int option;
 
@@ -53,7 +56,7 @@ public class App {
                         break;
                     }
 
-                    contacts.add(new Contact(name, phone, email));
+                    contactService.add(new Contact(name, phone, email));
                     System.out.println("Contato adicionado!");
                     break;
 
