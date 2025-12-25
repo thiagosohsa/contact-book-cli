@@ -14,7 +14,7 @@ public class ContactService {
     }
 
     public List<Contact> getAll() {
-        return contacts;
+        return List.copyOf(contacts);
     }
 
     public int size() {
