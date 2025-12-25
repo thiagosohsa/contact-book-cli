@@ -56,11 +56,11 @@ public class App {
                     if (contactService.getAll().isEmpty()) {
                         System.out.println("Nenhum contato cadastrado.");
                     } else {
-                        for (int i = 0; i < contactService.size(); i++) {
-                            Contact c = contactService.getAll().get(i);
+                        int index = 1;
+                        for (Contact c : contactService.getAll()) {
                             System.out.printf(
                                     "%d - %s | %s | %s%n",
-                                    (i + 1),
+                                    index++,
                                     c.getName(),
                                     c.getPhone(),
                                     c.getEmail());
