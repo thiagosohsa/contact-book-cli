@@ -26,28 +26,7 @@ public class App {
             switch (option) {
 
                 case 1:
-                    System.out.print("Nome: ");
-                    String name = sc.nextLine().trim();
-
-                    System.out.print("Telefone: ");
-                    String phone = sc.nextLine().trim();
-
-                    System.out.print("Email: ");
-                    String email = sc.nextLine().trim();
-
-                    if (name.isEmpty() || phone.isEmpty() || email.isEmpty()) {
-                        System.out.println("Erro: nome, telefone e email são obrigatórios.");
-                        break;
-                    }
-
-                    boolean added = contactService.addIfEmailUnique(new Contact(name, phone, email));
-
-                    if (added) {
-                        System.out.println("Contato adicionado!");
-                    } else {
-                        System.out.println("Erro: já existe alguém com esse email.");
-                    }
-
+                    addContact(sc, contactService);
                     break;
 
                 case 2:
@@ -116,5 +95,28 @@ public class App {
         } while (option != 0);
 
         sc.close();
+    }
+
+    private static void addContact(Scanner sc, ContactService service) {
+        System.out.print("Nome: ");
+        String name = sc.nextLine().trim();
+
+        System.out.print("Telefone: ");
+        String phone = sc.nextLine().trim();
+
+        System.out.print("Email: ");
+        String email = sc.nextLine().trim();
+
+        if (name.isEmpty() || phone.isEmpty() || email.isEmpty()) {
+            System.out.println("Erro: nome, telefone e email são obrigatórios.");
+        }
+
+        boolean added = service.addIfEmailUnique(new Contact(name, phone, email));
+
+        if (added) {
+            System.out.println("Contato adicionado!");
+        } else {
+            System.out.println("Erro: já existe alguém com esse email.");
+        }
     }
 }
