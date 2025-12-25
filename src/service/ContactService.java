@@ -27,4 +27,14 @@ public class ContactService {
         }
         return contacts.remove(index);
     }
+
+    public boolean addIfEmailUnique(Contact contact) {
+        for (Contact c : contacts) {
+            if (c.getEmail().equalsIgnoreCase(contact.getEmail())) {
+                return false;
+            }
+        }
+        contacts.add(contact);
+        return true;
+    }
 }

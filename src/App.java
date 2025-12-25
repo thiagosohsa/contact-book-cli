@@ -40,22 +40,14 @@ public class App {
                         break;
                     }
 
-                    boolean emailExists = false;
+                    boolean added = contactService.addIfEmailUnique(new Contact(name, phone, email));
 
-                    for (Contact c : contactService.getAll()) {
-                        if (c.getEmail().equalsIgnoreCase(email)) {
-                            emailExists = true;
-                            break;
-                        }
+                    if (added) {
+                        System.out.println("Contato adicionado!");
+                    } else {
+                        System.out.println("Erro: já existe alguém com esse email.");
                     }
 
-                    if (emailExists) {
-                        System.out.println("Erro: já existe um contato com esse email.");
-                        break;
-                    }
-
-                    contactService.add(new Contact(name, phone, email));
-                    System.out.println("Contato adicionado!");
                     break;
 
                 case 2:
