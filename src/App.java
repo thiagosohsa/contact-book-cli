@@ -38,19 +38,7 @@ public class App {
                     break;
 
                 case 4:
-                    System.out.print("Digite o número do contato para remover: ");
-                    int removeNumber = sc.nextInt();
-                    sc.nextLine(); // limpa buffer
-
-                    int removeIndex = removeNumber - 1;
-
-                    Contact removed = contactService.removeByIndex(removeIndex);
-
-                    if (removed == null) {
-                        System.out.println("Contato inválido.");
-                    } else {
-                        System.out.println("Contato removido: " + removed.getName());
-                    }
+                    removeContact(sc, contactService);
                     break;
 
                 case 0:
@@ -126,6 +114,22 @@ public class App {
 
         if (!found) {
             System.out.println("Nenhum contato encontrado.");
+        }
+    }
+
+    private static void removeContact(Scanner sc, ContactService contactService) {
+        System.out.print("Digite o número do contato para remover: ");
+        int removeNumber = sc.nextInt();
+        sc.nextLine(); // limpa buffer
+
+        int removeIndex = removeNumber - 1;
+
+        Contact removed = contactService.removeByIndex(removeIndex);
+
+        if (removed == null) {
+            System.out.println("Contato inválido.");
+        } else {
+            System.out.println("Contato removido: " + removed.getName());
         }
     }
 }
