@@ -1,8 +1,6 @@
 import model.Contact;
 import service.ContactService;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class App {
@@ -44,7 +42,7 @@ public class App {
 
                     boolean emailExists = false;
 
-                    for (Contact c : contacts) {
+                    for (Contact c : contactService.getAll()) {
                         if (c.getEmail().equalsIgnoreCase(email)) {
                             emailExists = true;
                             break;
@@ -63,11 +61,11 @@ public class App {
                 case 2:
                     System.out.println("\n--- LISTA DE CONTATOS ---");
 
-                    if (contacts.isEmpty()) {
+                    if (contactService.getAll().isEmpty()) {
                         System.out.println("Nenhum contato cadastrado.");
                     } else {
-                        for (int i = 0; i < contacts.size(); i++) {
-                            Contact c = contacts.get(i);
+                        for (int i = 0; i < contactService.size(); i++) {
+                            Contact c = contactService.getAll().get(i);
                             System.out.printf(
                                     "%d - %s | %s | %s%n",
                                     (i + 1),
@@ -85,7 +83,7 @@ public class App {
                     boolean found = false;
                     System.out.println("\n--- RESULTADO DA BUSCA ---");
 
-                    for (Contact c : contacts) {
+                    for (Contact c : contactService.getAll()) {
                         if (c.getName().toLowerCase().contains(search)) {
                             System.out.printf(
                                     "%s | %s | %s%n",
@@ -108,10 +106,11 @@ public class App {
 
                     int removeIndex = removeNumber - 1;
 
-                    if (removeIndex < 0 || removeIndex >= contacts.size()) {
+                    Contact removed = contactService.removeByIndex(removeIndex);
+
+                    if (removed == null) {
                         System.out.println("Contato inválido.");
                     } else {
-                        Contact removed = contacts.remove(removeIndex);
                         System.out.println("Contato removido: " + removed.getName());
                     }
                     break;

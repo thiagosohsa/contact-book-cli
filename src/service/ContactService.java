@@ -16,4 +16,15 @@ public class ContactService {
     public List<Contact> getAll() {
         return contacts;
     }
+
+    public int size() {
+        return contacts.size();
+    }
+
+    public Contact removeByIndex(int index) {
+        if (index < 0 || index >= contacts.size()) {
+            return null;
+        }
+        return contacts.remove(index);
+    }
 }
