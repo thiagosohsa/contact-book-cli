@@ -13,7 +13,15 @@ public class ContactService {
         contacts.add(contact);
     }
 
+    private boolean isValidEmail(String email) {
+        return email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$");
+    }
+
     public boolean addIfEmailUnique(Contact contact) {
+        if (!isValidEmail(contact.getEmail())) {
+            return false;
+        }
+
         for (Contact c : contacts) {
             if (c.getEmail().equalsIgnoreCase(contact.getEmail())) {
                 return false;
