@@ -30,21 +30,7 @@ public class App {
                     break;
 
                 case 2:
-                    System.out.println("\n--- LISTA DE CONTATOS ---");
-
-                    if (contactService.getAll().isEmpty()) {
-                        System.out.println("Nenhum contato cadastrado.");
-                    } else {
-                        int index = 1;
-                        for (Contact c : contactService.getAll()) {
-                            System.out.printf(
-                                    "%d - %s | %s | %s%n",
-                                    index++,
-                                    c.getName(),
-                                    c.getPhone(),
-                                    c.getEmail());
-                        }
-                    }
+                    listContacts(contactService);
                     break;
 
                 case 3:
@@ -109,6 +95,7 @@ public class App {
 
         if (name.isEmpty() || phone.isEmpty() || email.isEmpty()) {
             System.out.println("Erro: nome, telefone e email são obrigatórios.");
+            return;
         }
 
         boolean added = service.addIfEmailUnique(new Contact(name, phone, email));
@@ -117,6 +104,24 @@ public class App {
             System.out.println("Contato adicionado!");
         } else {
             System.out.println("Erro: já existe alguém com esse email.");
+        }
+    }
+
+    private static void listContacts(ContactService contactService) {
+        System.out.println("\n--- LISTA DE CONTATOS ---");
+
+        if (contactService.getAll().isEmpty()) {
+            System.out.println("Nenhum contato cadastrado.");
+        } else {
+            int index = 1;
+            for (Contact c : contactService.getAll()) {
+                System.out.printf(
+                        "%d - %s | %s | %s%n",
+                        index++,
+                        c.getName(),
+                        c.getPhone(),
+                        c.getEmail());
+            }
         }
     }
 }
