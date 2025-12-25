@@ -34,26 +34,7 @@ public class App {
                     break;
 
                 case 3:
-                    System.out.print("Buscar por nome: ");
-                    String search = sc.nextLine().trim().toLowerCase();
-
-                    boolean found = false;
-                    System.out.println("\n--- RESULTADO DA BUSCA ---");
-
-                    for (Contact c : contactService.getAll()) {
-                        if (c.getName().toLowerCase().contains(search)) {
-                            System.out.printf(
-                                    "%s | %s | %s%n",
-                                    c.getName(),
-                                    c.getPhone(),
-                                    c.getEmail());
-                            found = true;
-                        }
-                    }
-
-                    if (!found) {
-                        System.out.println("Nenhum contato encontrado.");
-                    }
+                    searchContacts(sc, contactService);
                     break;
 
                 case 4:
@@ -122,6 +103,29 @@ public class App {
                         c.getPhone(),
                         c.getEmail());
             }
+        }
+    }
+
+    private static void searchContacts(Scanner sc, ContactService contactService) {
+        System.out.print("Buscar por nome: ");
+        String search = sc.nextLine().trim().toLowerCase();
+
+        boolean found = false;
+        System.out.println("\n--- RESULTADO DA BUSCA ---");
+
+        for (Contact c : contactService.getAll()) {
+            if (c.getName().toLowerCase().contains(search)) {
+                System.out.printf(
+                        "%s | %s | %s%n",
+                        c.getName(),
+                        c.getPhone(),
+                        c.getEmail());
+                found = true;
+            }
+        }
+
+        if (!found) {
+            System.out.println("Nenhum contato encontrado.");
         }
     }
 }
