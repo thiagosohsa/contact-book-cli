@@ -12,11 +12,10 @@ public class ContactServiceTest {
         ContactService service = new ContactService();
         service.clear();
 
-        boolean added = service.addIfEmailUnique(
+        AddContactResult result = service.add(
                 new Contact("Ana", "11912345678", "ana@gmail.com")
         );
 
-        assertTrue(added);
-        assertEquals(1, service.size());
+        assertEquals(AddContactResult.SUCCESS, result);
     }
 }

@@ -1,4 +1,5 @@
 import model.Contact;
+import service.AddContactResult;
 import service.ContactService;
 
 import java.util.Scanner;
@@ -76,12 +77,19 @@ public class App {
             return;
         }
 
-        boolean added = service.addIfEmailUnique(new Contact(name, phone, email));
+        AddContactResult result = service.add(
+                new Contact(name, phone, email)
+        );
 
-        if (added) {
-            System.out.println("Contato adicionado!");
-        } else {
-            System.out.println("Erro: já existe alguém com esse email.");
+        switch (result) {
+            case SUCCESS:
+                System.out.println("Contato adicionado!");
+                break;
+            case EMAIL_INVALID:
+                System.out.println("Erro: email inválido.");
+                break;
+            case EMAIL_DUPLICATE:
+                System.out.println("Erro: já existe alguém com esse email.");
         }
     }
 
@@ -136,6 +144,11 @@ public class App {
         int removeIndex = removeNumber - 1;
 
         Contact contact = contactService.getByIndex(removeIndex);
+
+        if (contact == null) {
+            System.out.println("Contato inválido.");
+            return;
+        }
 
         System.out.print("Tem certeza que deseja remover " + contact.getName() + "? (s/n): ");
         String confirm = sc.nextLine().trim().toLowerCase();

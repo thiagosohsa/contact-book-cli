@@ -20,11 +20,6 @@ public class ContactService {
         contacts.clear();
     }
 
-    public void add(Contact contact) {
-        contacts.add(contact);
-        storage.save(contacts);
-    }
-
     private String normalizePhone(String phone) {
         return phone.replaceAll("\\D", "");
     }
@@ -33,24 +28,23 @@ public class ContactService {
         return email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$");
     }
 
-    public boolean addIfEmailUnique(Contact contact) {
+    public AddContactResult add(Contact contact) {
         if (!isValidEmail(contact.getEmail())) {
-            return false;
+            return AddContactResult.EMAIL_INVALID;
         }
 
         for (Contact c : contacts) {
             if (c.getEmail().equalsIgnoreCase(contact.getEmail())) {
-                return false;
+                return AddContactResult.EMAIL_DUPLICATE;
             }
         }
 
         String normalizedPhone = normalizePhone(contact.getPhone());
-
         Contact normalizedContact = new Contact(contact.getName(), normalizedPhone, contact.getEmail());
 
         contacts.add(normalizedContact);
         storage.save(contacts);
-        return true;
+        return AddContactResult.SUCCESS;
     }
 
     public List<Contact> getAll() {
