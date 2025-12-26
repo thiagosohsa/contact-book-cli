@@ -16,6 +16,10 @@ public class ContactService {
         this.contacts = storage.load();
     }
 
+    void clear() {
+        contacts.clear();
+    }
+
     public void add(Contact contact) {
         contacts.add(contact);
         storage.save(contacts);
