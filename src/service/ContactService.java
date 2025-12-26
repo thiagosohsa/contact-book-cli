@@ -13,6 +13,10 @@ public class ContactService {
         contacts.add(contact);
     }
 
+    private String normalizePhone(String phone) {
+        return phone.replaceAll("\\D", "");
+    }
+
     private boolean isValidEmail(String email) {
         return email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$");
     }
@@ -27,7 +31,12 @@ public class ContactService {
                 return false;
             }
         }
-        contacts.add(contact);
+
+        String normalizedPhone = normalizePhone(contact.getPhone());
+
+        Contact normalizedContact = new Contact(contact.getName(), normalizedPhone, contact.getEmail());
+
+        contacts.add(normalizedContact);
         return true;
     }
 
