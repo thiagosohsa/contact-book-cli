@@ -18,10 +18,8 @@ public class App {
             System.out.println("3 - Buscar por nome");
             System.out.println("4 - Remover contato");
             System.out.println("0 - Sair");
-            System.out.print("Escolha uma opção: ");
 
-            option = sc.nextInt();
-            sc.nextLine();
+            option = readMenuOption(sc);
 
             switch (option) {
 
@@ -50,6 +48,17 @@ public class App {
         } while (option != 0);
 
         sc.close();
+    }
+
+    private static int readMenuOption(Scanner sc) {
+        System.out.print("Escolha uma opção: ");
+        String input = sc.nextLine().trim();
+
+        try {
+            return Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            return -1;
+        }
     }
 
     private static void addContact(Scanner sc, ContactService service) {
