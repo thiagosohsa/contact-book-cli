@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
+
         Scanner sc = new Scanner(System.in);
 
         ContactService contactService = new ContactService();
@@ -44,12 +45,16 @@ public class App {
                     System.out.println("Saindo...");
                     break;
                 default:
-                    System.out.println("Opção inválida.");
+                    System.out.println(MSG_INVALID_OPTION);
             }
         } while (option != 0);
 
         sc.close();
     }
+
+    private static final String MSG_INVALID_OPTION = "✖ Opção inválida.";
+    private static final String MSG_EMPTY_LIST = "ℹ Nenhum contato cadastrado.";
+    private static final String MSG_INVALID_CONTACT = "✖ Contato inválido.";
 
     private static int readMenuOption(Scanner sc) {
         System.out.print("Escolha uma opção: ");
@@ -83,13 +88,13 @@ public class App {
 
         switch (result) {
             case SUCCESS:
-                System.out.println("Contato adicionado!");
+                System.out.println("✔ Contato adicionado com sucesso!");
                 break;
             case EMAIL_INVALID:
-                System.out.println("Erro: email inválido.");
+                System.out.println("✖ Email inválido.");
                 break;
             case EMAIL_DUPLICATE:
-                System.out.println("Erro: já existe alguém com esse email.");
+                System.out.println("✖ Já existe um contato cadastrado com esse email.");
         }
     }
 
@@ -99,7 +104,7 @@ public class App {
         var contacts = contactService.listAll();
 
         if (contacts.isEmpty()) {
-            System.out.println("Nenhum contato cadastrado.");
+            System.out.println(MSG_EMPTY_LIST);
             return;
         }
 
@@ -123,7 +128,7 @@ public class App {
         System.out.println("\n--- RESULTADO DA BUSCA ---");
 
         if (results.isEmpty()) {
-            System.out.println("Nenhum contato encontrado.");
+            System.out.println("i Nenhum contato encontrado.");
             return;
         }
 
@@ -146,7 +151,7 @@ public class App {
         Contact contact = contactService.getByIndex(removeIndex);
 
         if (contact == null) {
-            System.out.println("Contato inválido.");
+            System.out.println(MSG_INVALID_CONTACT);
             return;
         }
 
@@ -154,16 +159,16 @@ public class App {
         String confirm = sc.nextLine().trim().toLowerCase();
 
         if (!confirm.equals("s")) {
-            System.out.println("Remoção cancelada.");
+            System.out.println("i Remoção cancelada.");
             return;
         }
 
         Contact removed = contactService.removeByIndex(removeIndex);
 
         if (removed == null) {
-            System.out.println("Contato inválido.");
+            System.out.println(MSG_INVALID_CONTACT);
         } else {
-            System.out.println("Contato removido: " + removed.getName());
+            System.out.println("✔ Contato removido: " + removed.getName());
         }
     }
 }
