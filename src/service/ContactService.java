@@ -1,6 +1,7 @@
 package service;
 
 import model.Contact;
+import storage.ContactStorage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,8 +10,15 @@ public class ContactService {
 
     private List<Contact> contacts = new ArrayList<>();
 
+    private ContactStorage storage = new ContactStorage();
+
+    public ContactService() {
+        this.contacts = storage.load();
+    }
+
     public void add(Contact contact) {
         contacts.add(contact);
+        storage.save(contacts);
     }
 
     private String normalizePhone(String phone) {
@@ -37,6 +45,7 @@ public class ContactService {
         Contact normalizedContact = new Contact(contact.getName(), normalizedPhone, contact.getEmail());
 
         contacts.add(normalizedContact);
+        storage.save(contacts);
         return true;
     }
 
@@ -68,6 +77,9 @@ public class ContactService {
         if (index < 0 || index >= contacts.size()) {
             return null;
         }
-        return contacts.remove(index);
+
+        Contact removed = contacts.remove(index);
+        storage.save(contacts);
+        return removed;
     }
 }
