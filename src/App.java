@@ -135,6 +135,16 @@ public class App {
 
         int removeIndex = removeNumber - 1;
 
+        Contact contact = contactService.getByIndex(removeIndex);
+
+        System.out.print("Tem certeza que deseja remover " + contact.getName() + "? (s/n): ");
+        String confirm = sc.nextLine().trim().toLowerCase();
+
+        if (!confirm.equals("s")) {
+            System.out.println("Remoção cancelada.");
+            return;
+        }
+
         Contact removed = contactService.removeByIndex(removeIndex);
 
         if (removed == null) {

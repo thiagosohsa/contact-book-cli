@@ -77,6 +77,13 @@ public class ContactService {
         return result;
     }
 
+    public Contact getByIndex(int index) {
+        if (index < 0 || index >= contacts.size()) {
+            return null;
+        }
+        return contacts.get(index);
+    }
+
     public Contact removeByIndex(int index) {
         if (index < 0 || index >= contacts.size()) {
             return null;
