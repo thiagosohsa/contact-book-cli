@@ -110,6 +110,16 @@ public class App {
         }
     }
 
+    private static String formatPhone(String phone) {
+        if (phone.length() == 11) {
+            return String.format("(%s) %s-%s",
+                    phone.substring(0, 2),
+                    phone.substring(2, 7),
+                    phone.substring(7));
+        }
+        return phone;
+    }
+
     private static void listContacts(ContactService contactService) {
         System.out.println("\n--- LISTA DE CONTATOS ---");
 
@@ -126,7 +136,7 @@ public class App {
                     "%d - %s | %s | %s%n",
                     index++,
                     c.getName(),
-                    c.getPhone(),
+                    formatPhone(c.getPhone()),
                     c.getEmail());
         }
     }
