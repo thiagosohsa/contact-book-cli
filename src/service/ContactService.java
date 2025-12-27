@@ -52,7 +52,9 @@ public class ContactService {
     }
 
     public List<Contact> listAll() {
-        return new ArrayList<>(contacts);
+        List<Contact> sorted = new ArrayList<>(contacts);
+        sorted.sort((a, b) -> a.getName().compareToIgnoreCase(b.getName()));
+        return sorted;
     }
 
     public int size() {

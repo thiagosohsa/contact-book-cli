@@ -3,7 +3,6 @@ package service;
 import model.Contact;
 import org.junit.jupiter.api.Test;
 import storage.ContactRepository;
-import storage.ContactStorage;
 import storage.InMemoryContactRepository;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
