@@ -6,9 +6,10 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ContactStorage {
+public class ContactStorage implements ContactRepository {
     private static final String FILE_PATH = "contacts.csv";
 
+    @Override
     public List<Contact> load() {
         List<Contact> contacts = new ArrayList<>();
 
@@ -30,6 +31,7 @@ public class ContactStorage {
         return contacts;
     }
 
+    @Override
     public void save(List<Contact> contacts) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_PATH))) {
             for (Contact c : contacts) {

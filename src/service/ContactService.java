@@ -1,7 +1,7 @@
 package service;
 
 import model.Contact;
-import storage.ContactStorage;
+import storage.ContactRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,11 +9,11 @@ import java.util.List;
 public class ContactService {
 
     private final List<Contact> contacts;
-    private final ContactStorage storage;
+    private final ContactRepository repository;
 
-    public ContactService(ContactStorage storage) {
-        this.storage = storage;
-        this.contacts = storage.load();
+    public ContactService(ContactRepository repository) {
+        this.repository = repository;
+        this.contacts = repository.load();
     }
 
     void clear() {
@@ -43,7 +43,7 @@ public class ContactService {
         Contact normalizedContact = new Contact(contact.getName(), normalizedPhone, contact.getEmail());
 
         contacts.add(normalizedContact);
-        storage.save(contacts);
+        repository.save(contacts);
         return AddContactResult.SUCCESS;
     }
 
@@ -84,7 +84,7 @@ public class ContactService {
         }
 
         Contact removed = contacts.remove(index);
-        storage.save(contacts);
+        repository.save(contacts);
         return removed;
     }
 }
