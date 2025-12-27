@@ -2,6 +2,7 @@
 out/
 bin/
 data/*.csv
+*.csv
 
 
 .idea/

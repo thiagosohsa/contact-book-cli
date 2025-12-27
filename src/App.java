@@ -52,6 +52,16 @@ public class App {
         sc.close();
     }
 
+    private static Integer readInt(Scanner sc) {
+        String input = sc.nextLine().trim();
+
+        try {
+            return Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            return null;
+        }
+    }
+
     private static final String MSG_INVALID_OPTION = "✖ Opção inválida.";
     private static final String MSG_EMPTY_LIST = "ℹ Nenhum contato cadastrado.";
     private static final String MSG_INVALID_CONTACT = "✖ Contato inválido.";
