@@ -2,13 +2,15 @@ package service;
 
 import model.Contact;
 import org.junit.jupiter.api.Test;
+import storage.ContactStorage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ContactServiceTest {
     @Test
     void shouldAddContactWhenEmailIsValidAndUnique() {
-        ContactService service = new ContactService();
+        ContactStorage storage = new ContactStorage();
+        ContactService service = new ContactService(storage);
         service.clear();
 
         AddContactResult result = service.add(

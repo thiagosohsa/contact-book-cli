@@ -1,6 +1,7 @@
 import model.Contact;
 import service.AddContactResult;
 import service.ContactService;
+import storage.ContactStorage;
 
 import java.util.Scanner;
 
@@ -9,7 +10,8 @@ public class App {
 
         Scanner sc = new Scanner(System.in);
 
-        ContactService contactService = new ContactService();
+        ContactStorage storage = new ContactStorage();
+        ContactService contactService = new ContactService(storage);
 
         int option;
 

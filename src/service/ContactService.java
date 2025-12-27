@@ -8,11 +8,11 @@ import java.util.List;
 
 public class ContactService {
 
-    private List<Contact> contacts = new ArrayList<>();
+    private final List<Contact> contacts;
+    private final ContactStorage storage;
 
-    private ContactStorage storage = new ContactStorage();
-
-    public ContactService() {
+    public ContactService(ContactStorage storage) {
+        this.storage = storage;
         this.contacts = storage.load();
     }
 
